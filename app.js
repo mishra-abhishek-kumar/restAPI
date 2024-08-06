@@ -9,9 +9,8 @@ dotenv.config({ path: "./.env" });
 const bodyParser = require("body-parser");
 app.use(bodyParser.json());
 
-app.get("/", (req, res) => {
-	console.log("Application running");
-});
+const indexRoute = require("./routes/index");
+app.use("/api", indexRoute);
 
 //accessing PORT from environment variables
 const PORT = process.env.PORT || 3000;
