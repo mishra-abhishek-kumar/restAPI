@@ -24,7 +24,7 @@ const getOneMovie = async (req, res) => {
 		}
 		return res.status(200).send({ movie });
 	} catch (error) {
-		console.log("Error in getAllMovies controller: ", error);
+		console.log("Error in getOneMovie controller: ", error);
 	}
 };
 
@@ -43,7 +43,20 @@ const createMovie = async (req, res) => {
 	}
 };
 
-const updateMovie = () => {};
+const updateMovie = async (req, res) => {
+	const { id } = req.params;
+	const { name, image, summary } = req.body;
+	try {
+		const updatedMovie = await Movie.updateOne(
+			{ _id: id },
+			{ $set: { name, image, summary } }
+		);
+
+		return res.status(200).send({ updatedMovie });
+	} catch (error) {
+		console.log("Error in updateMovie controller: ", error);
+	}
+};
 
 const deleteMovie = () => {};
 
