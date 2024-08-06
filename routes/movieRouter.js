@@ -1,8 +1,9 @@
 const router = require("express").Router();
+const movieController = require("../controllers/movieController");
 
 router.get("/getall");
 router.get("getone");
-router.post("/");
+router.post("/", movieController.createMovie);
 router.put("/:id");
 router.delete("/:id");
 
