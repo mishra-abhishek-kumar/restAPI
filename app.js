@@ -12,6 +12,9 @@ app.use(bodyParser.json());
 const indexRoute = require("./routes/index");
 app.use("/api", indexRoute);
 
+const dbConnect = require("./utils/dbConnect");
+dbConnect();
+
 //accessing PORT from environment variables
 const PORT = process.env.PORT || 3000;
 
