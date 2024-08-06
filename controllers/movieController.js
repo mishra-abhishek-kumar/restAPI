@@ -1,8 +1,32 @@
 const Movie = require("../models/Movie");
 
-const getAllMovies = () => {};
+const getAllMovies = async (req, res) => {
+	try {
+		const allMovies = await Movie.find();
 
-const getOneMovie = () => {};
+		if (allMovies.length > 0) {
+			return res.status(200).send(allMovies);
+		}
+
+		return res.status(200).send("No movies found");
+	} catch (error) {
+		console.log("Error in getAllMovies controller: ", error);
+	}
+};
+
+const getOneMovie = async (req, res) => {
+	const { id } = req.params;
+
+	try {
+		const movie = await Movie.findById(id);
+		if (!movie) {
+			return res.status(404).send("No result found");
+		}
+		return res.status(200).send({ movie });
+	} catch (error) {
+		console.log("Error in getAllMovies controller: ", error);
+	}
+};
 
 const createMovie = async (req, res) => {
 	const { name, image, summary } = req.body;
