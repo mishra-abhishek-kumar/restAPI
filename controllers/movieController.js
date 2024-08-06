@@ -58,7 +58,17 @@ const updateMovie = async (req, res) => {
 	}
 };
 
-const deleteMovie = () => {};
+const deleteMovie = async (req, res) => {
+	const { id } = req.params;
+
+	try {
+		const deletedMovie = await Movie.deleteOne({ _id: id });
+
+		return res.status(200).send("Movie deleted successfully");
+	} catch (error) {
+		console.log("Error in updateMovie controller: ", error);
+	}
+};
 
 module.exports = {
 	getAllMovies,
